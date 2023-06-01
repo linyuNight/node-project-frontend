@@ -6,7 +6,10 @@
     "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "db": "docker buildx build --platform=linux/amd64 -t q526645879/node-project-frontend:v1.0.0 .",
+    "dr": "docker run -dp3005:80 q526645879/node-project-frontend:v1.0.0",
+    "dp": "docker push q526645879/node-project-frontend:v1.0.0"
   },
   "dependencies": {
     "core-js": "^3.8.3",

@@ -5,10 +5,12 @@
       <div>{{ item.content }}</div>
     </div>
   </div>
+  <div @click="handlerClick">click</div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const diaryList = ref([
   {
@@ -16,6 +18,12 @@ const diaryList = ref([
     content: 'text111111'  
   }
 ])
+
+const handlerClick = () => {
+  axios.get('http://127.0.0.1:3001/test').then(res => {
+    console.log('测试res', res)
+  })
+}
 </script>
 
 <style lang="less">

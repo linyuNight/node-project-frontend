@@ -26,3 +26,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 通过打包成 docker镜像 到服务器，服务直接 docker run 即可执行
 
 通过 default.conf 修改 nginx 配置
+
+
+将打包文件生成镜像
+yarn db
+
+将打包文件传到dockerhub
+yarn dp

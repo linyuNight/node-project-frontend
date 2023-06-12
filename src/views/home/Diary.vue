@@ -87,6 +87,7 @@ const sendMessage = () => {
     // 发送消息给服务器
     socket.emit('message', {
       username: store.state.user.username,
+      userid: store.state.user.userid,
       message: newMessage.value,
       group: group.value
     })

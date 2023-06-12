@@ -40,8 +40,9 @@ onMounted(() => {
 
   getCurrentUser().then(res => {
     console.log('测试用户', res)
-    if (res.username) {
+    if (res && res.username) {
       store.state.user = {
+        userid: res.id,
         username: res.username
       }
     }

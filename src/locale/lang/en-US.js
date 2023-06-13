@@ -5,7 +5,7 @@ export default {
     test: 'test i18n'
   },
   login: {
-    title: 'Chat Room',
+    title: '...',
     username: 'username',
     password: 'password',
     login: 'login',

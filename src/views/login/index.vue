@@ -38,12 +38,18 @@ const handlerLogin = () => {
     username: login.value.username,
     password: login.value.password
   }).then(res => {
-    console.log('测试post', res.token)
-    localStorage.setItem('token', res.token)
+    console.log('测试post', res)
+    if (res) {
+      localStorage.setItem('token', res.token)
 
-    router.push({
-      name: 'home'
-    })
+      router.push({
+        name: 'home'
+      })
+    } else if (res === false) {
+      ElMessage.error('用户名或者密码错误')
+    } else {
+      ElMessage.error('网络错误')
+    }
   })
 }
 

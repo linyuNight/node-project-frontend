@@ -10,7 +10,20 @@ const routes = [
       {
         path: '/diary',
         name: 'diary',
-        component: () => import('@/views/home/Diary.vue')
+        redirect: '/diary/hello',
+        component: () => import('@/views/home/diary/index.vue'),
+        children: [
+          {
+            path: '/diary/hello',
+            name: 'hello',
+            component: () => import('@/views/home/diary/Hello.vue')
+          },
+          {
+            path: '/diary/room/:id',
+            name: 'room',
+            component: () => import('@/views/home/diary/Room.vue')
+          }
+        ]
       },
       {
         path: '/tools',

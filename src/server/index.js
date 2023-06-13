@@ -1,13 +1,6 @@
 import axios from 'axios'
-import { isPro } from '@/config/index.js'
+import { baseUrl } from '@/config/index.js'
 import router from '@/router'
-
-let baseUrl = ''
-if (isPro) {
-  baseUrl = 'http://103.152.132.60:3001'
-} else {
-  baseUrl = 'http://127.0.0.1:3001'
-}
 
 const server = axios.create({
   baseURL: baseUrl,

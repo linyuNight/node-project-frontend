@@ -10,7 +10,7 @@
         v-for="(item, index) in groups"
         :key="index"
         @click="handlerJoinRoom(item)"
-      >{{ item.groupname }}</div>ß
+      >{{ item.groupname }}</div>
     </div>
   </div>
 </template>

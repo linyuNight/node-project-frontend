@@ -35,3 +35,14 @@ export const createGroup = (params) => {
 export const queryAllGroups = (params) => {
   return server.get('query_all_groups', params)
 }
+
+// 查询群信息
+export const queryGroup = (params) => {
+  return server.post('query_group', params)
+}
+
+// // 删除一条群消息
+// export const deleteGroupMessage = (params) => {
+//   console.log('测试删除', params)
+//   return server.post('delete_group_message', params)
+// }

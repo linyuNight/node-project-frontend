@@ -12,6 +12,7 @@
     "dp": "docker push q526645879/node-project-frontend:v1.0.0"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
     "element-plus": "^2.3.6",

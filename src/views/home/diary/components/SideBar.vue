@@ -60,17 +60,14 @@ const showJoin = () => {
     cancelButtonText: '取消'
   })
     .then(({ value }) => {
-      // createGroup({
-      //   groupname: value
-      // }).then(res => {
-      //   console.log('加入创建', res)
-      // })
+
     })
     .catch(() => {})
 }
 
 // 查看所有群
 const handlerQueryAllGroups = () => {
+  store.state.roomLoading = true
   queryAllGroups().then(res => {
     console.log('测试所有群', res)
 
@@ -85,6 +82,8 @@ const handlerQueryAllGroups = () => {
     store.state.groups = groups.value
   }).catch(err => {
     console.log(err)
+  }).finally(() => {
+    store.state.roomLoading = false
   })
 }
 

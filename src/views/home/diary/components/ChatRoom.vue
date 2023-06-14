@@ -1,11 +1,15 @@
 <template>
   <div class="chat-room transparent-card">
-    <router-view/>
+    <router-view :key="route.params.id" v-if="!store.state.roomLoading"/>
   </div>
 </template>
 
 <script setup>
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
+const store = useStore()
+const route = useRoute()
 </script>
 
 <style lang="less">

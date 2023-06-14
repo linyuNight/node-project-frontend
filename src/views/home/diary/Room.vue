@@ -8,11 +8,15 @@
       >
         <div class="user-image"></div>
         <div class="user-content">
-          <div class="user-name">{{ item.username }}:</div>
+          <div class="user-name">{{ item.username }}</div>
           <div class="user-message">
             <div class="triangle"></div>
             <span>{{ item.message }}</span>
           </div>
+          <Delete
+            class="delete-btn"
+            @click="handlerDeleteMessage(item.id)"
+          />
         </div>
       </div>
     </div>
@@ -29,6 +33,10 @@ import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { io } from 'socket.io-client'
 import { baseUrl } from '@/config/index.js'
+import {
+  queryGroup
+  // deleteGroupMessage
+} from '@/api/index.js'
 
 const store = useStore()
 
@@ -49,14 +57,14 @@ let socket = null
 const newMessage = ref('')
 // 消息列表
 const messages = ref([
-  {
-    message: '123123123123123',
-    username: '1231231'
-  },
-  {
-    message: '1231231231231',
-    username: '123123'
-  }
+  // {
+  //   message: '123123123123123',
+  //   username: '1231231'
+  // },
+  // {
+  //   message: '1231231231231',
+  //   username: '123123'
+  // }
   // {
   //   message:"123",
   //   username:"123"
@@ -118,15 +126,54 @@ const sendMessage = () => {
       username: store.state.user.username,
       userid: store.state.user.userid,
       message: newMessage.value,
-      group: groupname.value
+      groupname: groupname.value
     })
 
     // 清空输入框
     newMessage.value = ''
+
+    getMessages()
   }
 }
 
+// 删除消息
+const handlerDeleteMessage = (id) => {
+  ElMessageBox.confirm('删除该聊天记录', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+    .then(() => {
+      // deleteGroupMessage({
+      //   groupname: groupname.value,
+      //   id: id
+      // }).then(res => {
+      //   console.log('测试删除', res)
+      //   getMessages()
+      // })
+      socket.emit('delete_message', {
+        groupname: groupname.value,
+        id: id
+      })
+    })
+    .catch(() => {})
+}
+
+// 获取group信息
+const getMessages = () => {
+  queryGroup({
+    groupname: groupname.value
+  }).then(res => {
+    console.log('测试群信息', res)
+    if (res && res.messages) {
+      messages.value = res.messages
+    }
+  })
+}
+
 onMounted(() => {
+  // 获取group信息
+  getMessages()
+
   socket = io(baseUrl, {
     auth: {
       token: localStorage.getItem('token')
@@ -140,11 +187,21 @@ onMounted(() => {
   joinGroup(groupname.value)
 
   socket.on('message', (data) => {
-    console.log('测试返回数据', data)
+    console.log('测试返回消息', data)
     messages.value.push({
       username: data.username,
-      message: data.message
+      message: data.message,
+      id: data.id
     })
+  })
+
+  socket.on('delete_message', (data) => {
+    console.log('测试返回数据', data)
+    if (data && data.id) {
+      messages.value = messages.value.filter(val => {
+        return val.id !== data.id
+      })
+    }
   })
 })
 
@@ -195,6 +252,14 @@ onBeforeUnmount(() => {
             border-top: 6px solid transparent;
             border-bottom: 6px solid transparent;
           }
+        }
+        .delete-btn {
+          position: relative;
+          top: 2px;
+          width: 18px;
+          color: #555;
+          margin-left: 10px;
+          cursor: pointer;
         }
       }
     }

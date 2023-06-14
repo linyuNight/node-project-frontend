@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     user: {},
-    groups: []
+    groups: [],
+    roomLoading: true
   },
   getters: {
   },

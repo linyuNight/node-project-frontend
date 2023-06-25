@@ -102,12 +102,13 @@ const logout = () => {
     margin: 0 auto;
     width: 1200px;
     height: 100%;
-    padding: 10px 0;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     .header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #ccc;
       padding: 0 24px;
       margin-bottom: 10px;
@@ -140,7 +141,8 @@ const logout = () => {
       }
     }
     .main {
-      flex: 1;
+      // flex: 1;
+      height: calc(100% - 50px)
     }
   }
 }

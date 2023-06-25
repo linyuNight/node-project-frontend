@@ -104,7 +104,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .side-bar{
   width: 200px;
   // background: #fff;

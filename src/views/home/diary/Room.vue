@@ -1,6 +1,6 @@
 <template>
   <div class="room">
-    <div class="message-list">
+    <div class="message-list" ref="messageListRef">
       <div
         v-for="(item, index) in messages"
         :key="index"

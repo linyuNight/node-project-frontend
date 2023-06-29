@@ -18,11 +18,11 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 import {
   loginApi
-} from '@/api/index.js'
+} from '@/api/index'
 import { useRouter } from 'vue-router'
 
 const login = ref({
@@ -37,7 +37,7 @@ const handlerLogin = () => {
   loginApi({
     username: login.value.username,
     password: login.value.password
-  }).then(res => {
+  }).then((res: any) => {
     console.log('测试post', res)
     if (res) {
       localStorage.setItem('token', res.token)

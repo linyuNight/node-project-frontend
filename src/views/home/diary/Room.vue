@@ -27,18 +27,20 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, onMounted, computed, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
+import { GlobalStore } from "@/stores";
 import { io } from 'socket.io-client'
-import { baseUrl } from '@/config/index.js'
+import { baseUrl } from '@/config/index'
 import {
   queryGroup
   // deleteGroupMessage
 } from '@/api/index.js'
 
-const store = useStore()
+// const store = useStore()
+const globalStore: any = GlobalStore();
 
 const route = useRoute()
 
@@ -46,13 +48,13 @@ const groupname = computed(() => {
   // console.log('测试store', store.state.groups.find(val => {
   //   return val.id === route.params.id
   // }))
-  return store.state.groups.find(val => {
+  return globalStore.groups.find((val: any) => {
     return val.id === route.params.id
   })?.groupname ?? ''
   // return 'aaa'
 })
 
-let socket = null
+let socket: any = null
 // 发送的新消息
 const newMessage = ref('')
 // 消息列表
@@ -105,10 +107,10 @@ const messages = ref([
   //   message:"123",
   //   username:"123"
   // }
-])
+] as any)
 
 // 加入群
-const joinGroup = (groupname) => {
+const joinGroup = (groupname: any) => {
   socket.emit('joinGroup', groupname)
 }
 
@@ -123,8 +125,8 @@ const sendMessage = () => {
     // console.log('测试message', message)
     // 发送消息给服务器
     socket.emit('message', {
-      username: store.state.user.username,
-      userid: store.state.user.userid,
+      username: globalStore.user.username,
+      userid: globalStore.user.userid,
       message: newMessage.value,
       groupname: groupname.value
     })
@@ -137,7 +139,7 @@ const sendMessage = () => {
 }
 
 // 删除消息
-const handlerDeleteMessage = (id) => {
+const handlerDeleteMessage = (id: any) => {
   ElMessageBox.confirm('删除该聊天记录', '提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消'
@@ -162,7 +164,7 @@ const handlerDeleteMessage = (id) => {
 const getMessages = () => {
   queryGroup({
     groupname: groupname.value
-  }).then(res => {
+  }).then((res: any) => {
     console.log('测试群信息', res)
     if (res && res.messages) {
       messages.value = res.messages
@@ -186,7 +188,7 @@ onMounted(() => {
 
   joinGroup(groupname.value)
 
-  socket.on('message', (data) => {
+  socket.on('message', (data: any) => {
     console.log('测试返回消息', data)
     messages.value.push({
       username: data.username,
@@ -195,10 +197,10 @@ onMounted(() => {
     })
   })
 
-  socket.on('delete_message', (data) => {
+  socket.on('delete_message', (data: any) => {
     console.log('测试返回数据', data)
     if (data && data.id) {
-      messages.value = messages.value.filter(val => {
+      messages.value = messages.value.filter((val: any) => {
         return val.id !== data.id
       })
     }

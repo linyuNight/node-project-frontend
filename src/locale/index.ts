@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
-import cn from './lang/zh-TC.js'
-import en from './lang/en-US.js'
+import cn from './lang/zh-TC'
+import en from './lang/en-US'
 
 const messages = {
   cn: cn,

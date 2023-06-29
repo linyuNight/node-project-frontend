@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import SideBar from '@/views/home/diary/components/SideBar.vue'
 import ChatRoom from '@/views/home/diary/components/ChatRoom.vue'
 </script>

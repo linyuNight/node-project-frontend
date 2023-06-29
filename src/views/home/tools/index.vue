@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, getCurrentInstance, onMounted } from 'vue'
 
 const toolsList = ref([
@@ -21,11 +21,11 @@ const toolsList = ref([
   }
 ])
 
-let myVideoRef = null
-let myAudioRef = null
+let myVideoRef: any = null
+let myAudioRef: any = null
 
 onMounted(() => {
-  const currentInstance = getCurrentInstance()
+  const currentInstance: any = getCurrentInstance()
   myVideoRef = currentInstance.refs.myVideo
   myAudioRef = currentInstance.refs.myAudio
 })

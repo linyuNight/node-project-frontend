@@ -1,15 +1,18 @@
 <template>
   <div class="chat-room transparent-card">
-    <router-view :key="route.params.id" v-if="!store.state.roomLoading"/>
+    <router-view :key="route.params.id" v-if="!globalStore.roomLoading"/>
   </div>
 </template>
 
-<script setup>
-import { useStore } from 'vuex'
+<script lang="ts" setup>
+// import { useStore } from 'vuex'
+import { GlobalStore } from "@/stores";
 import { useRoute } from 'vue-router'
 
-const store = useStore()
-const route = useRoute()
+// const store = useStore()
+const globalStore = GlobalStore();
+
+const route: any = useRoute()
 </script>
 
 <style lang="less">

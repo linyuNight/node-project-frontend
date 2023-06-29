@@ -17,11 +17,11 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 import {
   registerApi
-} from '@/api/index.js'
+} from '@/api/index'
 import { useRouter } from 'vue-router'
 
 const register = ref({
@@ -36,7 +36,7 @@ const handlerRegister = () => {
   registerApi({
     username: register.value.username,
     password: register.value.password
-  }).then(res => {
+  }).then((res: any) => {
     // console.log('测试post', res)
     if (res === 'success') {
       ElMessage({

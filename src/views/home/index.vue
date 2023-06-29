@@ -5,7 +5,7 @@
         <div class="header-l">
           <div
             class="header-item"
-            :class="route.name === item.name ? 'active' : ''"
+            :class="route.name === item.name || route.meta.parent === item.name ? 'active' : ''"
             v-for="(item, index) in headerList"
             :key="index"
             @click="handlerHeaderClick(item)"
@@ -32,11 +32,14 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getCurrentUser } from '@/api/index.js'
-import { useStore } from 'vuex'
+import { getCurrentUser } from '@/api/index'
+// import { useStore } from 'vuex'
+import { GlobalStore } from "@/stores";
+
+const globalStore = GlobalStore();
 
 const headerList = ref([
   {
@@ -46,38 +49,42 @@ const headerList = ref([
   {
     label: 'tools',
     name: 'tools'
+  },
+  {
+    label: 'manager',
+    name: 'manager'
   }
 ])
 
-const user = ref('{}')
+const user = ref({} as any)
 
 const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
   console.log(route.name)
-  const store = useStore()
+  // const store = useStore()
 
-  getCurrentUser().then(res => {
+  getCurrentUser().then((res: any) => {
     console.log('测试用户', res)
     if (res && res.username) {
-      store.state.user = {
+      globalStore.user = {
         userid: res.id,
         username: res.username
       }
 
-      user.value = store.state.user
+      user.value = globalStore.user
     } else {
       router.push({
         name: 'login'
       })
     }
-  }).catch(err => {
+  }).catch((err: any) => {
     console.log(err)
   })
 })
 
-const handlerHeaderClick = (item) => {
+const handlerHeaderClick = (item: any) => {
   router.push({
     name: item.name
   })
@@ -117,7 +124,8 @@ const logout = () => {
         align-items: center;
         margin-left: -6px;
         .header-item {
-          width: 60px;
+          // width: 60px;
+          padding: 0 16px;
           height: 40px;
           text-align: center;
           line-height: 40px;

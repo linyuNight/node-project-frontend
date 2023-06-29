@@ -1,7 +1,7 @@
-import server from '@/server/index.js'
+import server from '@/server/index'
 
 // 注册
-export const registerApi = (params) => {
+export const registerApi = (params: any) => {
   return server.post('/register', {
     username: params.username,
     password: params.password
@@ -9,7 +9,7 @@ export const registerApi = (params) => {
 }
 
 // 登录
-export const loginApi = (params) => {
+export const loginApi = (params: any) => {
   return server.post('login', {
     username: params.username,
     password: params.password
@@ -27,17 +27,17 @@ export const getCurrentUser = () => {
 }
 
 // 创建群组
-export const createGroup = (params) => {
+export const createGroup = (params: any) => {
   return server.post('create_group', params)
 }
 
 // 查询所有群组
-export const queryAllGroups = (params) => {
-  return server.get('query_all_groups', params)
+export const queryAllGroups = () => {
+  return server.get('query_all_groups')
 }
 
 // 查询群信息
-export const queryGroup = (params) => {
+export const queryGroup = (params: any) => {
   return server.post('query_group', params)
 }
 

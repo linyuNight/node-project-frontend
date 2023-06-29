@@ -7,6 +7,7 @@
     <div class="user-groups">
       <div
         class="groups-item"
+        :class="item.id === route.params.id ? 'active' : ''"
         v-for="(item, index) in groups"
         :key="index"
         @click="handlerJoinRoom(item)"
@@ -15,24 +16,28 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import {
   queryAllUsersApi,
   createGroup,
   queryAllGroups
-} from '@/api/index.js'
-import { useStore } from 'vuex'
+} from '@/api/index'
+// import { useStore } from 'vuex'
+import { GlobalStore } from "@/stores";
+
+const globalStore: any = GlobalStore();
 
 const router = useRouter()
-const store = useStore()
+const route = useRoute()
+// const store = useStore()
 const groups = ref([])
 
 const handlerCheck = () => {
-  queryAllUsersApi().then(res => {
+  queryAllUsersApi().then((res: any) => {
     console.log('测试res', res)
-  }).catch(err => {
+  }).catch((err: any) => {
     console.log(err)
   })
 }
@@ -42,11 +47,11 @@ const showCreate = () => {
     confirmButtonText: '确认',
     cancelButtonText: '取消'
   })
-    .then(({ value }) => {
+    .then(({ value }: any) => {
       createGroup({
         groupname: value,
-        creator: store.state.user.username
-      }).then(res => {
+        creator: globalStore.user.username
+      }).then((res: any) => {
         console.log('测试创建', res)
         handlerQueryAllGroups()
       })
@@ -59,7 +64,7 @@ const showJoin = () => {
     confirmButtonText: '确认',
     cancelButtonText: '取消'
   })
-    .then(({ value }) => {
+    .then(({ value }: any) => {
 
     })
     .catch(() => {})
@@ -67,11 +72,11 @@ const showJoin = () => {
 
 // 查看所有群
 const handlerQueryAllGroups = () => {
-  store.state.roomLoading = true
-  queryAllGroups().then(res => {
+  globalStore.roomLoading = true
+  queryAllGroups().then((res: any) => {
     console.log('测试所有群', res)
 
-    groups.value = JSON.parse(JSON.stringify(res)).map(val => {
+    groups.value = JSON.parse(JSON.stringify(res)).map((val: any) => {
       return {
         id: val._id,
         groupname: val.groupname,
@@ -79,16 +84,16 @@ const handlerQueryAllGroups = () => {
       }
     })
 
-    store.state.groups = groups.value
-  }).catch(err => {
+    globalStore.groups = groups.value
+  }).catch((err: any) => {
     console.log(err)
   }).finally(() => {
-    store.state.roomLoading = false
+    globalStore.roomLoading = false
   })
 }
 
 // 点击进入房间
-const handlerJoinRoom = (item) => {
+const handlerJoinRoom = (item: any) => {
   console.log('测试进入群', item)
   router.push({
     name: 'room',
@@ -122,12 +127,15 @@ onMounted(() => {
   .user-groups {
     .groups-item {
       height:  36px;
-      margin-bottom: 10px;
-      background: #fff;
+      margin-bottom: 10px;      
+      background: #ddd;
       border-radius: 6px;
       line-height: 36px;
       padding: 0 10px;
       cursor: pointer;
+    }
+    .active {
+      background: #fff;
     }
   }
 }

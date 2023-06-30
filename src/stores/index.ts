@@ -15,7 +15,7 @@ export const GlobalStore = defineStore({
   id: "GlobalStore",
   state: () => {
     return {
-      user: {},
+      user: {} as any,
       groups: [],
       roomLoading: true
     }

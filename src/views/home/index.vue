@@ -1,29 +1,7 @@
 <template>
   <div class="home">
-    <div class="home-content">
-      <div class="header transparent-card">
-        <div class="header-l">
-          <div
-            class="header-item"
-            :class="route.name === item.name || route.meta.parent === item.name ? 'active' : ''"
-            v-for="(item, index) in headerList"
-            :key="index"
-            @click="handlerHeaderClick(item)"
-          >
-            {{ item.label }}
-          </div>
-        </div>
-        <div class="header-r">
-          <el-dropdown v-if="user.username">
-            <span class="user-name">{{ user.username }}</span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item @click="logout">Logout</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
-      </div>
+    <div class="home-content" v-if="(globalStore.user as any).username" >
+      <Header />
       <div class="main">
         <router-view />
       </div>
@@ -34,27 +12,10 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { getCurrentUser } from '@/api/index'
-// import { useStore } from 'vuex'
+import Header from './header/index.vue'
 import { GlobalStore } from "@/stores";
-
-const globalStore = GlobalStore();
-
-const headerList = ref([
-  {
-    label: 'diary',
-    name: 'diary'
-  },
-  {
-    label: 'tools',
-    name: 'tools'
-  },
-  {
-    label: 'manager',
-    name: 'manager'
-  }
-])
+import { getCurrentUser } from '@/api/index'
+import { useRouter, useRoute } from 'vue-router'
 
 const user = ref({} as any)
 
@@ -84,19 +45,7 @@ onMounted(() => {
   })
 })
 
-const handlerHeaderClick = (item: any) => {
-  router.push({
-    name: item.name
-  })
-}
-
-const logout = () => {
-  localStorage.removeItem('token')
-
-  router.push({
-    name: 'login'
-  })
-}
+const globalStore = GlobalStore();
 </script>
 
 <style lang="less">
@@ -111,43 +60,7 @@ const logout = () => {
     height: 100%;
     padding: 10px;
     display: flex;
-    flex-direction: column;
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ccc;
-      padding: 0 24px;
-      margin-bottom: 10px;
-      .header-l {
-        display: flex;
-        align-items: center;
-        margin-left: -6px;
-        .header-item {
-          // width: 60px;
-          padding: 0 16px;
-          height: 40px;
-          text-align: center;
-          line-height: 40px;
-          margin-right: 10px;
-          cursor: pointer;
-          &:hover {
-            color: #fff;
-          }
-        }
-        .active {
-          color: #fff;
-        }
-      }
-      .header-r {
-        display: flex;
-        align-items: center;
-        .user-name {
-          color: #000;
-          cursor: pointer;
-        }
-      }
-    }
+    flex-direction: column;    
     .main {
       // flex: 1;
       height: calc(100% - 50px)

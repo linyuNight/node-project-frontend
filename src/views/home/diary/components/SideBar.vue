@@ -32,7 +32,7 @@ const globalStore: any = GlobalStore();
 const router = useRouter()
 const route = useRoute()
 // const store = useStore()
-const groups = ref([])
+const groups = ref([] as any)
 
 const handlerCheck = () => {
   queryAllUsersApi().then((res: any) => {

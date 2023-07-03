@@ -28,6 +28,7 @@
       </div>
     </template>
   </el-upload>
+  <LinkDownLoad />
   <div class="files-contain">
     <div class="total transparent-card" v-for="(item, index) in fileList" :key="index">
       <el-icon class="folder-icon"><Files /></el-icon>
@@ -47,6 +48,7 @@ import type { UploadInstance } from 'element-plus'
 import { baseUrl } from '@/config/index'
 import { GlobalStore } from "@/stores";
 import  { queryCloudData, downloadCloudFile, getVideo } from '@/api/index'
+import LinkDownLoad from '@/views/home/clound_data/components/LinkDownLoad.vue'
 
 const authorization = localStorage.getItem('token')
 

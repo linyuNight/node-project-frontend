@@ -66,6 +66,11 @@ export const getVideo = (params: any) => {
   })
 }
 
+// 磁力下载
+export const linkDownLoad = (params: any) => {
+  return server.post('magnet_link_download', params)
+}
+
 // 创建文件夹
 // export const createCloudFolder = (id: any) => {
 //   return server.get(`create_clound_folder?userid=${id}`)

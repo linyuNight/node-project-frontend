@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
-import { viteMockServe } from 'vite-plugin-mock'
+// import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite';
 import AutoImportComponents from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
@@ -10,10 +10,10 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [
     vue(),
-    viteMockServe({
-      mockPath: 'mock',
-      enable: true,
-    }),
+    // viteMockServe({
+    //   mockPath: 'mock',
+    //   enable: true,
+    // }),
     AutoImport({
       imports: ["vue", "vue-router"],
       resolvers: [ElementPlusResolver()],

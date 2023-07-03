@@ -54,7 +54,9 @@ const fileList = ref([] as any)
 // 获取文件列表
 const getFileList = () => {
   queryCloudData(globalStore.user.userid).then((res: any) => {
-    fileList.value = res.files
+    fileList.value = res.files.map((val: any) => {
+      return val.name
+    })
   })
 }
 
@@ -87,7 +89,7 @@ const downloadFile = (item: any) => {
     userid: globalStore.user.userid,
     filename: item
   }).then((res: any) => {
-    const blob = new Blob([res.data]);
+    const blob = new Blob([res]);
     const url = URL.createObjectURL(blob);
 
     // 创建下载链接
@@ -134,7 +136,7 @@ const openDownload = (item: any) => {
 
 <style lang="less" scoped>
 .files-contain {
-  display: flex;  
+  display: flex;
   .total {
     width: 100px;
     height: 100px;

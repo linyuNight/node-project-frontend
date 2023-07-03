@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home-content" v-if="(globalStore.user as any).username" >
+    <div class="home-content" v-if="globalStore.user.username" >
       <Header />
       <div class="main">
         <router-view />

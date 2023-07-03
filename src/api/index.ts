@@ -46,3 +46,13 @@ export const queryGroup = (params: any) => {
 //   console.log('测试删除', params)
 //   return server.post('delete_group_message', params)
 // }
+
+// 查询用户所有文件
+export const queryCloudData = (id: any) => {
+  return server.get(`query_clound_data?userid=${id}`)
+}
+
+// 查询用户所有文件
+export const downloadCloudFile = (params: any) => {
+  return server.get(`download_clound_file?userid=${params.userid}&filename=${params.filename}`)
+}

@@ -40,6 +40,11 @@ const router = createRouter({
           component: () => import('@/views/home/tools/index.vue')
         },
         {
+          path: '/clound_data',
+          name: 'cloundData',
+          component: () => import('@/views/home/clound_data/index.vue')
+        },
+        {
           path: '/manager',
           name: 'manager',
           component: () => import('@/views/home/manager/index.vue')

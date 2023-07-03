@@ -2,7 +2,7 @@
   <div class="side-bar transparent-card">
     <div class="create-group" @click="showCreate">创建群</div>
     <div class="join-group" @click="showJoin">加入群</div>
-    <div @click="handlerCheck">测试查看所有用户</div>
+    <!-- <div @click="handlerCheck">测试查看所有用户</div> -->
     <!-- <div @click="handlerQueryAllGroups">测试查看所有群</div> -->
     <div class="user-groups">
       <div
@@ -34,13 +34,13 @@ const route = useRoute()
 // const store = useStore()
 const groups = ref([] as any)
 
-const handlerCheck = () => {
-  queryAllUsersApi().then((res: any) => {
-    console.log('测试res', res)
-  }).catch((err: any) => {
-    console.log(err)
-  })
-}
+// const handlerCheck = () => {
+//   queryAllUsersApi().then((res: any) => {
+//     console.log('测试res', res)
+//   }).catch((err: any) => {
+//     console.log(err)
+//   })
+// }
 
 const showCreate = () => {
   ElMessageBox.prompt('创建一个群', '提示', {

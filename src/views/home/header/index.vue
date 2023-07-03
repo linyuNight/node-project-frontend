@@ -46,13 +46,17 @@ onMounted(() => {
     {
       label: 'tools',
       name: 'tools'
+    },
+    {
+      label: 'clound data',
+      name: 'cloundData'
     }
   ]
 
-  console.log('测试username', (globalStore.user as any).username)
+  console.log('测试username', globalStore.user.username)
 
-  if ((globalStore.user as any).username === '123') {
-    console.log((globalStore.user as any))
+  if (globalStore.user.username === '123') {
+    console.log(globalStore.user)
     headerList.value.push({
       label: 'manager',
       name: 'manager'

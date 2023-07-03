@@ -59,6 +59,13 @@ export const downloadCloudFile = (params: any) => {
   })
 }
 
+// 查询用户所有文件
+export const getVideo = (params: any) => {
+  return server.get(`video?userid=${params.userid}&filename=${params.filename}`, {
+    responseType: 'blob'
+  })
+}
+
 // 创建文件夹
 // export const createCloudFolder = (id: any) => {
 //   return server.get(`create_clound_folder?userid=${id}`)

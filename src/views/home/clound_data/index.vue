@@ -29,11 +29,16 @@
     </template>
   </el-upload>
   <div class="files-contain">
-    <div class="total transparent-card" v-for="(item, index) in fileList" :key="index" @click="openDownload(item)">
+    <div class="total transparent-card" v-for="(item, index) in fileList" :key="index">
       <el-icon class="folder-icon"><Files /></el-icon>
       <div>{{ item }}</div>
-    </div>
-  </div>  
+      <div @click="openDownload(item)">下载</div>
+      <div @click="play(item)">播放</div>
+    </div>    
+  </div>
+  <div>
+    <video class="play-video" :src="videoSrc" controls></video>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -41,7 +46,7 @@ import { onBeforeMount, ref } from 'vue'
 import type { UploadInstance } from 'element-plus'
 import { baseUrl } from '@/config/index'
 import { GlobalStore } from "@/stores";
-import  { queryCloudData, downloadCloudFile } from '@/api/index'
+import  { queryCloudData, downloadCloudFile, getVideo } from '@/api/index'
 
 const authorization = localStorage.getItem('token')
 
@@ -50,6 +55,8 @@ const globalStore = GlobalStore();
 const uploadRef = ref<UploadInstance>()
 
 const fileList = ref([] as any)
+
+const videoSrc = ref('' as any)
 
 // 获取文件列表
 const getFileList = () => {
@@ -132,6 +139,20 @@ const openDownload = (item: any) => {
     })
 }
 
+const play = (item: any) => {
+  getVideo({
+    userid: globalStore.user.userid,
+    filename: item
+  }).then((res: any) => {
+    const blob = new Blob([res]);
+    const url = URL.createObjectURL(blob);
+
+    videoSrc.value = url
+  }).catch(error => {
+    console.error('下载文件失败：', error);
+  });
+}
+
 </script>
 
 <style lang="less" scoped>
@@ -154,5 +175,9 @@ const openDownload = (item: any) => {
       font-size: 26px;
     }
   }
+}
+.play-video {
+  width: 600px;
+  height: 400px;
 }
 </style>

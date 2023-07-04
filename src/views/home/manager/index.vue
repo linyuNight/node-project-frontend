@@ -49,12 +49,15 @@
       </div>
     </template>
   </el-upload>
+  <el-button type="primary" @click="openUpdateBackend">更新后台</el-button>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { UploadInstance } from 'element-plus'
 import { baseUrl } from '@/config/index'
+import { updateBackend } from '@/api/index.ts'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const authorization = localStorage.getItem('token')
 
@@ -68,6 +71,34 @@ const uploadManagerRef = ref<UploadInstance>()
 
 const submitUploadManager = () => {
   uploadManagerRef.value!.submit()
+}
+
+// 更新后台
+const handlerUpdateBackend = () => {
+  updateBackend().then((res: any) => {
+    console.log('测试', res)
+  })
+}
+
+const openUpdateBackend = () => {
+  ElMessageBox.confirm(
+    '更新后台?',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      handlerUpdateBackend()
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled',
+      })
+    })
 }
 </script>
 

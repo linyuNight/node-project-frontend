@@ -75,3 +75,8 @@ export const linkDownLoad = (params: any) => {
 // export const createCloudFolder = (id: any) => {
 //   return server.get(`create_clound_folder?userid=${id}`)
 // }
+
+// 更新后台
+export const updateBackend = () => {
+  return server.post('update_backend')
+}

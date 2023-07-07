@@ -28,7 +28,7 @@
   <el-upload
     ref="uploadMobileRef"
     class="upload-demo"
-    :action="`${baseUrl}/upload`"
+    :action="`${baseUrl}/upload_mobile`"
     :auto-upload="false"
     :headers="{
       Authorization: authorization

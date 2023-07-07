@@ -1,5 +1,5 @@
 <template>
-  <div>node-project上传</div>
+  <div>node-project前端pc上传</div>
   <el-upload
     ref="uploadRef"
     class="upload-demo"
@@ -15,6 +15,31 @@
     </template>
 
     <el-button class="ml-3" type="success" @click="submitUpload">
+      upload to server
+    </el-button>
+
+    <template #tip>
+      <div class="el-upload__tip">
+        jpg/png files with a size less than 500kb
+      </div>
+    </template>
+  </el-upload>
+  <div>node-project前端mobile上传</div>
+  <el-upload
+    ref="uploadMobileRef"
+    class="upload-demo"
+    :action="`${baseUrl}/upload`"
+    :auto-upload="false"
+    :headers="{
+      Authorization: authorization
+    }"
+    multiple
+  >
+    <template #trigger>
+      <el-button type="primary">select file</el-button>
+    </template>
+
+    <el-button class="ml-3" type="success" @click="submitUploadMobile">
       upload to server
     </el-button>
 
@@ -65,6 +90,12 @@ const uploadRef = ref<UploadInstance>()
 
 const submitUpload = () => {
   uploadRef.value!.submit()
+}
+
+const uploadMobileRef = ref<UploadInstance>()
+
+const submitUploadMobile = () => {
+  uploadMobileRef.value!.submit()
 }
 
 const uploadManagerRef = ref<UploadInstance>()

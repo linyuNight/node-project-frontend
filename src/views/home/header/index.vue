@@ -50,6 +50,10 @@ onMounted(() => {
     {
       label: 'clound data',
       name: 'cloundData'
+    },
+    {
+      label: 'chatgpt',
+      name: 'chatgpt'
     }
   ]
 

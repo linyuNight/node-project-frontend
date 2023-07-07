@@ -45,6 +45,11 @@ const router = createRouter({
           component: () => import('@/views/home/clound_data/index.vue')
         },
         {
+          path: '/chatgpt',
+          name: 'chatgpt',
+          component: () => import('@/views/home/chatgpt/index.vue')
+        },
+        {
           path: '/manager',
           name: 'manager',
           component: () => import('@/views/home/manager/index.vue')

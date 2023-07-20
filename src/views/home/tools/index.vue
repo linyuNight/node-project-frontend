@@ -59,7 +59,7 @@ const showAudio = () => {
   border-bottom: 1px solid #ccc;
 }
 .my-video {
-  width: 300px;
-  height: 200px;
+  width: 1200px;
+  height: 1000px;
 }
 </style>

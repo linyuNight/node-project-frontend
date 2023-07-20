@@ -1,4 +1,5 @@
 import server from '@/server/index'
+import { queryParams, postParams } from '@/utils/params'
 
 // 注册
 export const registerApi = (params: any) => {
@@ -48,20 +49,32 @@ export const queryGroup = (params: any) => {
 // }
 
 // 查询用户所有文件
-export const queryCloudData = (id: any) => {
-  return server.get(`query_clound_data?userid=${id}`)
+export const queryCloudData = (params: any) => {
+  return server.get(`query_clound_data${queryParams(params)}`)
 }
 
-// 查询用户所有文件
+// 创建文件
+export const createFolder = (params: any) => {
+  return server.post('create_clound_data_folder', params)
+}
+
+// 下载文件
 export const downloadCloudFile = (params: any) => {
-  return server.get(`download_clound_file?userid=${params.userid}&filename=${params.filename}`, {
+  return server.get(`download_clound_file${queryParams(params)}`, {
     responseType: 'blob'
   })
 }
 
-// 查询用户所有文件
+// 删除文件或文件夹
+export const deleteCloudFile = (params: any) => {
+  return server.delete(`delete_cloud_file`, {
+    data: postParams(params)
+  })
+}
+
+// 查看video
 export const getVideo = (params: any) => {
-  return server.get(`video?userid=${params.userid}&filename=${params.filename}`, {
+  return server.get(`video${queryParams(params)}`, {
     responseType: 'blob'
   })
 }

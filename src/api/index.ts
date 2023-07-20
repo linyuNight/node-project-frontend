@@ -1,6 +1,8 @@
 import server from '@/server/index'
 import { queryParams, postParams } from '@/utils/params'
 
+export * from './music'
+
 // 注册
 export const registerApi = (params: any) => {
   return server.post('/register', {

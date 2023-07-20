@@ -54,6 +54,10 @@ onMounted(() => {
     {
       label: 'chatgpt',
       name: 'chatgpt'
+    },
+    {
+      label: 'music',
+      name: 'music'
     }
   ]
 

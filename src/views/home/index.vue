@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import Header from './header/index.vue'
+import Header from './Header/index.vue'
 import { GlobalStore } from "@/stores";
 import { getCurrentUser } from '@/api/index'
 import { useRouter, useRoute } from 'vue-router'

@@ -50,6 +50,11 @@ const router = createRouter({
           component: () => import('@/views/home/chatgpt/index.vue')
         },
         {
+          path: '/music',
+          name: 'music',
+          component: () => import('@/views/home/music/index.vue')
+        },
+        {
           path: '/manager',
           name: 'manager',
           component: () => import('@/views/home/manager/index.vue')

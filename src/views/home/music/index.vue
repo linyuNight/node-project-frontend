@@ -75,7 +75,6 @@ const getData = () => {
   queryMusic({
     userid: globalStore.user.userid
   }).then((res: any) => {
-    console.log('test res', res)
     musicList.value = res.files
   })
 }

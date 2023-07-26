@@ -109,15 +109,6 @@ watch(
   }
 )
 
-// onMounted(() => {
-//   console.log('测试onMounted')
-//   getFileList(route.query.path)
-
-//   uploadData.value = {
-//     userid: globalStore.user.userid
-//   }
-// })
-
 // 上传成功回调
 const handlerSuccess = () => {
   getData()
@@ -150,25 +141,11 @@ const handlerDeleteCloudFile = (item: any) => {
       })
     })
     .catch((err: any) => {
-      // ElMessage({
-      //   type: 'info',
-      //   message: 'Delete canceled',
-      // })
       console.log(err)
     })
 }
 
 const downloadFile = (item: any) => {
-  // // 后端文件下载路由，这种方式无法携带token，无法鉴权
-  // const backendDownloadUrl = `${baseUrl}/download_clound_file?userid=${globalStore.user.userid}&filename=${item}`;
-
-  // // 创建下载链接
-  // const link: any = document.createElement('a');
-  // link.href = backendDownloadUrl;
-  // document.body.appendChild(link);
-  // link.click();
-  // document.body.removeChild(link);
-
   downloadCloudFile({
     userid: globalStore.user.userid,
     path: route.query.path,
@@ -201,18 +178,9 @@ const openDownload = (item: any) => {
     }
   )
     .then(() => {
-      // ElMessage({
-      //   type: 'success',
-      //   message: 'Delete completed',
-      // })
-
       downloadFile(item)
     })
     .catch((err: any) => {
-      // ElMessage({
-      //   type: 'info',
-      //   message: 'Delete canceled',
-      // })
       console.log(err)
     })
 }

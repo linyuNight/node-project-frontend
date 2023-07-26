@@ -29,11 +29,17 @@
     </el-upload>
     <div class="music-list">
       <div class="item" v-for="(item, index) in musicList" :key="index">
-        <div>{{ item.name }}</div>
-        <el-button type="primary" @click="play(item)">播放</el-button>
+        <div :class="currentIndex == index ? 'active' : ''">{{ item.name }}</div>
+        <el-button type="primary" @click="play(item, index)">播放</el-button>
       </div>
     </div>
-    <audio ref="audioRef" :src="audioSrc" controls></audio>
+    <audio 
+      ref="audioRef" 
+      :src="audioSrc" 
+      controls
+      @ended="ended"
+      preload="auto"
+    ></audio>
   </div>  
 </template>
 
@@ -58,10 +64,13 @@ const audioRef = ref(null as any);
 
 const uploadRef = ref<UploadInstance>()
 
+const currentIndex = ref(null as any)
+
 onMounted(() => {
   getData()
 })
 
+// 获取音乐列表
 const getData = () => {
   queryMusic({
     userid: globalStore.user.userid
@@ -73,7 +82,9 @@ const getData = () => {
 
 // 上传成功回调
 const handlerSuccess = () => {
-  getData()
+  setTimeout(() => {
+    getData()
+  }, 300)  
 }
 
 // 上传
@@ -84,33 +95,24 @@ const submitUpload = () => {
 const audioSrc = ref('' as any); // 后端提供的音频接口
 
 // 播放音乐
-const play = async (item: any) => {
+const play = async (item: any, index: any) => {
+  currentIndex.value = index
+
   audioSrc.value = getMusic(item.name)
 
   nextTick(() => {
     audioRef.value.play()
   })
-  // try {
-  //   const response: any = await getMusic({
-  //     userid: globalStore.user.userid,
-  //     filename: item.name,
-  //     path: 'music'
-  //   });
+}
 
-  //   if (!response.ok) {
-  //     throw new Error('请求失败');
-  //   }
+const ended = () => {
+  if(currentIndex.value == musicList.value.length - 1) {
+    currentIndex.value = 0
+  } else {
+    currentIndex.value++
+  }  
 
-  //   const blob = await response.blob();
-  //   const url = URL.createObjectURL(blob);
-
-  //   audioSrc.value = url
-  //   nextTick(() => {
-  //     audioRef.value.play()
-  //   })
-  // } catch (error) {
-  //   console.error('播放音频失败：', error);
-  // }
+  play(musicList.value[currentIndex.value], currentIndex.value)
 }
 </script>
 
@@ -118,6 +120,9 @@ const play = async (item: any) => {
 .music-list {
   .item {
     display: flex;
+    .active {
+      color: #ffc
+    }
   }
 }
 </style>

@@ -24,7 +24,7 @@ server.interceptors.request.use(
 // 响应拦截
 server.interceptors.response.use(
   res => {
-    if (res.status === 200) {
+    if (res.status === 200 || res.status === 206) {
       return Promise.resolve(res.data)
     } else {
       return Promise.reject(new Error('Error Message'))

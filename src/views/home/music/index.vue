@@ -38,7 +38,7 @@
       :src="audioSrc" 
       controls
       @ended="ended"
-      preload="metadata"
+      preload="auto"
     ></audio>
   </div>  
 </template>
@@ -50,7 +50,7 @@ import type { UploadInstance } from 'element-plus'
 import {
   queryMusic,
   getMusic
-} from '@/server/api'
+} from '@/api'
 import { GlobalStore } from "@/stores";
 const globalStore = GlobalStore();
 

@@ -21,7 +21,7 @@
 import { ref } from 'vue'
 import {
   registerApi
-} from '@/server/api/index'
+} from '@/api/index'
 import { useRouter } from 'vue-router'
 
 const register = ref({

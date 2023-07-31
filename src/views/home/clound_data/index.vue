@@ -53,7 +53,7 @@ import { useRouter, useRoute } from 'vue-router'
 import type { UploadInstance } from 'element-plus'
 import { baseUrl } from '@/config/index'
 import { GlobalStore } from "@/stores";
-import  { queryCloudData, downloadCloudFile, getVideo, createFolder, deleteCloudFile } from '@/server/api/index'
+import  { queryCloudData, downloadCloudFile, getVideo, createFolder, deleteCloudFile } from '@/api/index'
 import LinkDownLoad from '@/views/home/clound_data/components/LinkDownLoad.vue'
 
 const authorization = localStorage.getItem('token')

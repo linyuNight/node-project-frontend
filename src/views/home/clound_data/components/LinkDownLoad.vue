@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { linkDownLoad } from '@/server/api'
+import { linkDownLoad } from '@/api/index.ts'
 
 const open = () => {
   ElMessageBox.prompt('Please input your link', 'Tip', {

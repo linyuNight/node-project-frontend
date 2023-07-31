@@ -22,7 +22,7 @@
 import { ref } from 'vue'
 import {
   loginApi
-} from '@/api/index'
+} from '@/server/api/index'
 import { useRouter } from 'vue-router'
 
 const login = ref({

@@ -81,7 +81,7 @@
 import { ref } from 'vue'
 import type { UploadInstance } from 'element-plus'
 import { baseUrl } from '@/config/index'
-import { updateBackend } from '@/api/index.ts'
+import { updateBackend } from '@/server/api'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const authorization = localStorage.getItem('token')

@@ -37,7 +37,7 @@ import { baseUrl } from '@/config/index'
 import {
   queryGroup
   // deleteGroupMessage
-} from '@/api/index.js'
+} from '@/server/api'
 
 // const store = useStore()
 const globalStore: any = GlobalStore();

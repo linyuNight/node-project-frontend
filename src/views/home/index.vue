@@ -14,7 +14,7 @@
 import { ref, onMounted } from 'vue'
 import Header from './Header/index.vue'
 import { GlobalStore } from "@/stores";
-import { getCurrentUser } from '@/api/index'
+import { getCurrentUser } from '@/server/api/index'
 import { useRouter, useRoute } from 'vue-router'
 
 const user = ref({} as any)

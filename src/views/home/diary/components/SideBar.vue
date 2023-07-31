@@ -23,7 +23,7 @@ import {
   queryAllUsersApi,
   createGroup,
   queryAllGroups
-} from '@/api/index'
+} from '@/server/api/index'
 // import { useStore } from 'vuex'
 import { GlobalStore } from "@/stores";
 
